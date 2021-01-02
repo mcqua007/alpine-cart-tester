@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <div id="app" x-data="app()">
+      <strong> Cart: <span x-text="count"></span></strong>
+      <template x-for="item in items">
+          <div x-text="item"></div>
+      </template>
+      <hr>
+      <input x-model="newItem" type="text" placeholder="add new item...."/>
+      <button @click="add">add</button>
+      <button @click="remove">remove</button>
+    </div>
+
+    <script>
+     function app () {
+        return {
+          newItem: null,
+          count: 2,
+          items: ["cup", "hat"],
+          add() {
+              if(this.newItem){
+                  this.items.push(this.newItem);
+                  this.count = this.items.length;
+                  this.newItem = ""; //clear's input 
+              }else{
+                  alert('item input blank');
+              }
+            
+          },
+          remove(){
+              this.items.pop();
+              this.count = this.items.length;
+          }
+        };
+      };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js"></script>
+  </body>
+</html>
